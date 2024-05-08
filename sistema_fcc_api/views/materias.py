@@ -94,6 +94,7 @@ class MateriasView(generics.CreateAPIView):
     
 class MateriasViewEdit(generics.CreateAPIView):
     permissions_classes = (permissions.IsAuthenticated,)
+    
     def put(self, request, *args, **kwargs):
         materia = get_object_or_404(Materia, id=request.data["id"])
         materia.nrc = request.data["nrc"]
@@ -106,6 +107,9 @@ class MateriasViewEdit(generics.CreateAPIView):
         materia.programa_educativo = request.data["programa_educativo"]
         materia.save()
 
+
+        materia = MateriaSerializer(materia, many=False).data
+        
         return Response(materia,200)
         
     
