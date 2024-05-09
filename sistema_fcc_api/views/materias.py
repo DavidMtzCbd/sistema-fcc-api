@@ -108,9 +108,9 @@ class MateriasViewEdit(generics.CreateAPIView):
         materia.save()
 
 
-        materia = MateriaSerializer(materia, many=False).data
+        mat = MateriaSerializer(materia, many=False).data
         
-        return Response(materia,200)
+        return Response(mat,200)
         
     
     def delete(self, request, *args, **kwargs):
